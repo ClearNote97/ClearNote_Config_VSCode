@@ -8,8 +8,9 @@
     "editor.glyphMargin": true,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.colorTheme": "Default Dark+",
+    "dev.containers.mountWaylandSocket": false,
     "jupyter.interactiveWindow.textEditor.executeSelection": true,
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
-    },
+    }
 }
