@@ -30,6 +30,7 @@ Incluye:
 ### 1. Clona este repositorio
 
 git clone https://github.com/tu_usuario/ClearNote_Config_VSCode.git
+
 cd ClearNote_Config_VSCode
 
 ### 2. (Opcional) Ejecuta el script de configuración en Windows PowerShell
