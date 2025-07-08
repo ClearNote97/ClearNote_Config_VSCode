@@ -62,4 +62,4 @@ Este repositorio se distribuye bajo la licencia [MIT](https://opensource.org/lic
 Gracias por tu interés y por contribuir a un ecosistema de desarrollo más limpio, reproducible y profesional 🚀
 
 ---
-MSc. Nicolás Enrique Valencia Santiago
+**MSc. Nicolás Enrique Valencia Santiago**
