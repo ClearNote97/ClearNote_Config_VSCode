@@ -50,6 +50,7 @@ Este comando instalará todas las extensiones listadas y copiará los settings.j
 > Execution of scripts is disabled on this system, sigue las instrucciones anteriores con Set-ExecutionPolicy.
 
 ---
+
 ## 🧼 ¿Cómo reiniciar toda la configuración desde cero?
 Abre PowerShell como administrador y ejecuta este bloque para limpiar toda la configuración previa de Visual Studio Code:
 
