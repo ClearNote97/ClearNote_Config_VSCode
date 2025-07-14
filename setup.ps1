@@ -13,4 +13,4 @@ if (Test-Path ".\keybindings.json") {
     Copy-Item -Path ".\keybindings.json" -Destination "$env:APPDATA\Code\User\keybindings.json" -Force
 }
 
-Write-Host "✅ Configuración aplicada correctamente."
+Write-Host "VSCode Configurado Correctamente."
