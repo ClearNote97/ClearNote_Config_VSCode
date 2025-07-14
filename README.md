@@ -31,21 +31,18 @@ Incluye:
 
 ### 1. Clona este repositorio
 
---- bash
-git clone https://github.com/tu_usuario/ClearNote_Config_VSCode.git
+                            git clone https://github.com/tu_usuario/ClearNote_Config_VSCode.git
 
-cd tu_ruta/ClearNote_Config_VSCode
+                            cd tu_ruta/ClearNote_Config_VSCode
 ---
 
 ### 2. Ejecuta el script de configuración (solo una vez por máquina)
 
 Abre PowerShell como administrador y ejecuta:
 
---- bash
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+                            Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
-./setup.ps1
----
+                            ./setup.ps1
 
 Este comando instalará todas las extensiones listadas y copiará los settings.json al entorno de usuario de VS Code.
 
@@ -56,20 +53,18 @@ Este comando instalará todas las extensiones listadas y copiará los settings.j
 ## 🧼 ¿Cómo reiniciar toda la configuración desde cero?
 Abre PowerShell como administrador y ejecuta este bloque para limpiar toda la configuración previa de Visual Studio Code:
 
---- bash
 ### Borra configuración del usuario
-Remove-Item -Recurse -Force "$env:APPDATA\Code" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:USERPROFILE\.vscode" -ErrorAction SilentlyContinue
+                            Remove-Item -Recurse -Force "$env:APPDATA\Code" -ErrorAction SilentlyContinue
+                            Remove-Item -Recurse -Force "$env:USERPROFILE\.vscode" -ErrorAction SilentlyContinue
 
 ### Borra configuración local (incluye caché de extensiones, contenedores remotos, etc.)
-Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Programs\Microsoft VS Code" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Code" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Temp\*Code*" -ErrorAction SilentlyContinue
-Remove-Item -Recurse -Force "$env:APPDATA\Code - Insiders" -ErrorAction SilentlyContinue
+                            Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Programs\Microsoft VS Code" -ErrorAction SilentlyContinue
+                            Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Code" -ErrorAction SilentlyContinue
+                            Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Temp\*Code*" -ErrorAction SilentlyContinue
+                            Remove-Item -Recurse -Force "$env:APPDATA\Code - Insiders" -ErrorAction SilentlyContinue
 
 ### Opcional: limpia posibles sobras de contenedores remotos
-Remove-Item -Recurse -Force "$env:APPDATA\Code\User\globalStorage\ms-vscode-remote.remote-containers" -ErrorAction SilentlyContinue
----
+                            Remove-Item -Recurse -Force "$env:APPDATA\Code\User\globalStorage\ms-vscode-remote.remote-containers" -ErrorAction SilentlyContinue
 
 ---
 
@@ -87,12 +82,9 @@ Remove-Item -Recurse -Force "$env:APPDATA\Code\User\globalStorage\ms-vscode-remo
 
 - ⚠️ Lección aprendida: Añadimos la línea siguiente en los settings.json para evitar errores de montaje en Windows al usar contenedores:
 
----bash
-"remote.containers.mountWaylandSocket": false
----
+                            "remote.containers.mountWaylandSocket": false
 
 Esto previene errores silenciosos o advertencias al iniciar entornos .devcontainer, especialmente en Windows.
-
 ---
 
 ## 🛠 ¿Qué incluye?
