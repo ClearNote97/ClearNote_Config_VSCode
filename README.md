@@ -21,8 +21,10 @@ Este repositorio sirve como **base replicable, limpia y portable** para quienes 
 Incluye:
 
 - `settings.json` con configuraciones limpias y funcionales
-- `extensions.txt` con las extensiones mínimas necesarias para el entorno global
-- `setup.ps1` para aplicar la configuración en un nuevo equipo
+- `extensions-core.txt` con las extensiones esenciales del entorno global
+- `extensions-optional.txt` con extensiones opcionales (el script pregunta antes de instalarlas)
+- `setup.sh` para aplicar la configuración en un equipo nuevo (Windows, Linux y macOS)
+- `reset.sh` para borrar toda la configuración de VS Code y empezar de cero (con confirmación)
 - Archivo `.gitattributes` para normalizar saltos de línea entre sistemas operativos
 
 ---
@@ -38,77 +40,84 @@ Incluye:
 
 ### 2. Ejecuta el script de configuración (solo una vez por máquina)
 
-Abre PowerShell como administrador y ejecuta:
+El script es **un solo archivo portable** (`setup.sh`) que funciona en los tres sistemas:
 
-                            Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+- 🪟 **Windows:** ábrelo desde **Git Bash** (no desde PowerShell). Git Bash viene con la instalación de Git para Windows.
+- 🐧 **Linux** y 🍎 **macOS:** ábrelo desde la terminal normal.
 
-                            ./setup.ps1
+En cualquiera de los tres:
 
-Este comando instalará todas las extensiones listadas y copiará los settings.json al entorno de usuario de VS Code.
+                            bash setup.sh
 
-> 🛑 Si recibes un error del tipo:
-> Execution of scripts is disabled on this system, sigue las instrucciones anteriores con Set-ExecutionPolicy.
+El script:
+
+1. Instala las extensiones **esenciales** (`extensions-core.txt`).
+2. Pregunta una por una si quieres instalar las **opcionales** (`extensions-optional.txt`).
+3. Hace un **respaldo** de tu `settings.json` anterior antes de aplicar el nuevo (nunca pierdes tu configuración previa).
+
+> 🛑 Si al ejecutar te dice que no encuentra el comando `code`, abre VS Code, presiona `Ctrl+Shift+P` y ejecuta:
+> **Shell Command: Install 'code' command in PATH**.
 
 ---
 
 ## 🧼 ¿Cómo reiniciar toda la configuración desde cero?
-Abre PowerShell como administrador y ejecuta este bloque para limpiar toda la configuración previa de Visual Studio Code:
 
-### Borra configuración del usuario
-                            Remove-Item -Recurse -Force "$env:APPDATA\Code" -ErrorAction SilentlyContinue
-                            Remove-Item -Recurse -Force "$env:USERPROFILE\.vscode" -ErrorAction SilentlyContinue
+Si quieres borrar **toda** la configuración previa de VS Code (settings, extensiones y caché) y arrancar limpio, usa el script dedicado:
 
-### Borra configuración local (incluye caché de extensiones, contenedores remotos, etc.)
-                            Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Programs\Microsoft VS Code" -ErrorAction SilentlyContinue
-                            Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Code" -ErrorAction SilentlyContinue
-                            Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Temp\*Code*" -ErrorAction SilentlyContinue
-                            Remove-Item -Recurse -Force "$env:APPDATA\Code - Insiders" -ErrorAction SilentlyContinue
+                            bash reset.sh
 
-### Opcional: limpia posibles sobras de contenedores remotos
-                            Remove-Item -Recurse -Force "$env:APPDATA\Code\User\globalStorage\ms-vscode-remote.remote-containers" -ErrorAction SilentlyContinue
+> ⚠️ Esta acción es **irreversible**. El script te pedirá que escribas la palabra `BORRAR` en mayúsculas antes de eliminar nada. Detecta tu sistema operativo y borra las carpetas correctas en Windows, Linux o macOS.
+
+Después de resetear, puedes volver a dejar todo listo con `bash setup.sh`.
 
 ---
 
 ## ✅ Buenas prácticas que seguimos
 
-- 🧩 Instalamos globalmente solo lo necesario para interactuar con Git y VS Code (no Python ni Jupyter).
+- 🧩 Instalamos globalmente solo lo necesario para interactuar con Git y con los contenedores (no Python ni Jupyter).
 
-- 📦 Las herramientas de desarrollo específicas (como formateadores o depuradores) viven dentro del contenedor.
+- 📦 Las herramientas de desarrollo específicas de cada lenguaje (formateadores, linters, depuradores) **viven dentro del contenedor**, en el `.devcontainer` de cada proyecto — no en esta configuración global.
+
+- 🤖 No incluimos un asistente de IA como extensión base. Se recomienda trabajar con tu asistente de IA preferido según el proyecto, y no atarlo a la plantilla global.
 
 - 🧼 Mantenemos VS Code en inglés y sin extensiones redundantes para mejorar rendimiento.
 
-- 🔐 No usamos rutas personales ni tokens en settings.json.
+- 🔐 No usamos rutas personales ni tokens en `settings.json`.
 
 - 🧱 Este repositorio sirve como punto de partida antes de iniciar cualquier entorno de trabajo basado en contenedores.
 
-- ⚠️ Lección aprendida: Añadimos la línea siguiente en los settings.json para evitar errores de montaje en Windows al usar contenedores:
+- ⚠️ Lección aprendida: Añadimos la línea siguiente en `settings.json` para evitar errores de montaje en Windows al usar contenedores:
 
                             "remote.containers.mountWaylandSocket": false
 
-Esto previene errores silenciosos o advertencias al iniciar entornos .devcontainer, especialmente en Windows.
+Esto previene errores silenciosos o advertencias al iniciar entornos `.devcontainer`, especialmente en Windows.
 ---
 
 ## 🛠 ¿Qué incluye?
 
-| Tipo de recurso                   | Archivo         |
-|-----------------------------------|-----------------|
-| Configuración global              | `settings.json` |
-| Lista de extensiones base         | `extensions.txt`|
-| Script de instalación automatizada| `setup.ps1`     |
-| Estandarización de saltos de línea| `.gitattributes`|
+| Tipo de recurso                     | Archivo                  |
+|-------------------------------------|--------------------------|
+| Configuración global                | `settings.json`          |
+| Extensiones esenciales              | `extensions-core.txt`    |
+| Extensiones opcionales              | `extensions-optional.txt`|
+| Script de instalación (portable)    | `setup.sh`               |
+| Script de reinicio total            | `reset.sh`               |
+| Estandarización de saltos de línea  | `.gitattributes`         |
 
 ---
 
 ## 🧠 Lecciones aprendidas
 Estas son las decisiones y descubrimientos que moldearon esta configuración:
 
-- Evitar ipykernel y Jupyter preinstalados en configuraciones base para mantener imágenes ligeras y enfocadas.
+- Evitar `ipykernel` y Jupyter preinstalados en configuraciones base para mantener imágenes ligeras y enfocadas.
 
-- Añadir ms-python.black-formatter como extensión y configurar Black como formateador sin necesidad de instalarlo globalmente.
+- Usar **Ruff** como linter y formateador de Python. Ruff no vive en esta configuración global: se instala **dentro del `.devcontainer`** de cada proyecto Python (extensión `charliermarsh.ruff` + formateo al guardar), para no imponer herramientas de Python a proyectos que no lo son.
 
-- Añadir "jupyter.interactiveWindow.textEditor.executeSelection": true incluso sin ipykernel, para habilitar la interactividad futura sin errores.
+- Mantener `"jupyter.interactiveWindow.textEditor.executeSelection": true` incluso sin `ipykernel` en el host, para habilitar la interactividad (ejecutar selección de código) sin errores en cuanto el entorno lo soporte.
 
-- Separar extensiones esenciales de las opcionales (como docker-compose o django) para mantener el entorno limpio y modular.
+- Separar extensiones esenciales (`extensions-core.txt`) de las opcionales (`extensions-optional.txt`) para mantener el entorno limpio y modular, dejando que quien instala decida qué opcionales quiere.
+
+- Un único `setup.sh` portable (Windows vía Git Bash, Linux y macOS) es más fácil de mantener que un script por sistema operativo.
 
 ---
 ## 📬 ¿Quieres colaborar?

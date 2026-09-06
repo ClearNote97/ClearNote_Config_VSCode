@@ -1,0 +1,2 @@
+# Extensiones opcionales — el script pregunta una por una antes de instalar.
+mhutchie.git-graph

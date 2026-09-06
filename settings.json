@@ -4,7 +4,7 @@
   "editor.linkedEditing": true,
   "editor.guides.bracketPairs": true,
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.glyphMargin": true,
   "workbench.colorTheme": "Default Dark+",
+  "jupyter.interactiveWindow.textEditor.executeSelection": true,
   "remote.containers.mountWaylandSocket": false
 }

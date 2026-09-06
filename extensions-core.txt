@@ -1,0 +1,5 @@
+# Extensiones esenciales — se instalan siempre.
+# Lo minimo para trabajar con Git y con Dev Containers.
+ms-vscode-remote.remote-containers
+ms-azuretools.vscode-containers
+eamodio.gitlens
