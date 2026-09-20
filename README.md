@@ -32,10 +32,10 @@ Incluye:
 ## ⚙️ ¿Cómo usar esta configuración?
 
 ### 1. Clona este repositorio
-
-                            git clone https://github.com/tu_usuario/ClearNote_Config_VSCode.git
-
-                            cd tu_ruta/ClearNote_Config_VSCode
+```bash
+git clone https://github.com/ClearNote97/ClearNote_Config_VSCode.git
+cd ClearNote_Config_VSCode
+```
 ---
 
 ### 2. Ejecuta el script de configuración (solo una vez por máquina)
@@ -46,8 +46,9 @@ El script es **un solo archivo portable** (`setup.sh`) que funciona en los tres 
 - 🐧 **Linux** y 🍎 **macOS:** ábrelo desde la terminal normal.
 
 En cualquiera de los tres:
-
-                            bash setup.sh
+```bash
+bash setup.sh
+```
 
 El script:
 
@@ -63,8 +64,9 @@ El script:
 ## 🧼 ¿Cómo reiniciar toda la configuración desde cero?
 
 Si quieres borrar **toda** la configuración previa de VS Code (settings, extensiones y caché) y arrancar limpio, usa el script dedicado:
-
-                            bash reset.sh
+```bash
+bash reset.sh
+```
 
 > ⚠️ Esta acción es **irreversible**. El script te pedirá que escribas la palabra `BORRAR` en mayúsculas antes de eliminar nada. Detecta tu sistema operativo y borra las carpetas correctas en Windows, Linux o macOS.
 
@@ -87,8 +89,9 @@ Después de resetear, puedes volver a dejar todo listo con `bash setup.sh`.
 - 🧱 Este repositorio sirve como punto de partida antes de iniciar cualquier entorno de trabajo basado en contenedores.
 
 - ⚠️ Lección aprendida: Añadimos la línea siguiente en `settings.json` para evitar errores de montaje en Windows al usar contenedores:
-
-                            "remote.containers.mountWaylandSocket": false
+```json
+"remote.containers.mountWaylandSocket": false
+```
 
 Esto previene errores silenciosos o advertencias al iniciar entornos `.devcontainer`, especialmente en Windows.
 ---
@@ -135,5 +138,11 @@ Si tienes mejoras, ideas o usas otras prácticas en tu flujo de trabajo, puedes:
 ## ⚖️ Licencia
 
 Distribuido bajo licencia [MIT](https://opensource.org/license/MIT). Puedes copiar, modificar y reutilizar esta plantilla con total libertad.
+
+## 🙏 Agradecimientos
+
+Plantilla enriquecida con la asistencia de [Helix — agente de IA](https://github.com/ftuga/helix_asisten) de [ftuga](https://github.com/ftuga).
+
+---
 
 **MSc. Nicolás Enrique Valencia Santiago**
