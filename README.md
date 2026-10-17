@@ -1,5 +1,14 @@
 # 🧠 Mi Configuración Global para Visual Studio Code (ClearNote)
 
+<p align="center">
+  <img src="https://img.shields.io/badge/VS_Code-config-007ACC?logo=visualstudiocode&logoColor=white" alt="VS Code">
+  <img src="https://img.shields.io/badge/Dev_Containers-ready-2496ED?logo=docker&logoColor=white" alt="Dev Containers">
+  <img src="https://img.shields.io/badge/Windows%20%7C%20Linux%20%7C%20macOS-portable-444" alt="cross-platform">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT">
+</p>
+
+<p align="center"><em>Configuración global de VS Code, limpia y portable, para trabajar desde Dev Containers.</em></p>
+
 ¡Hola! 👋
 
 Gracias por visitar este repositorio. Aquí encontrarás una plantilla curada y funcional de configuración global para Visual Studio Code, pensada especialmente para:
