@@ -52,7 +52,9 @@ cd ClearNote_Config_VSCode
 El script es **un solo archivo portable** (`setup.sh`) que funciona en los tres sistemas:
 
 - 🪟 **Windows:** ábrelo desde **Git Bash** (no desde PowerShell). Git Bash viene con la instalación de Git para Windows.
-- 🐧 **Linux** y 🍎 **macOS:** ábrelo desde la terminal normal.
+- 🐧 **Linux** (cualquier distro; también VS Code instalado con Flatpak) y 🍎 **macOS:** ábrelo desde la terminal normal.
+- 🚫 **WSL:** no. VS Code guarda su configuración en Windows, así que desde WSL el script escribiría donde
+  VS Code no lee. Los dos scripts detectan WSL (cualquier distro) y te piden usar Git Bash en Windows.
 
 En cualquiera de los tres:
 ```bash
@@ -64,6 +66,8 @@ El script:
 1. Instala las extensiones **esenciales** (`extensions-core.txt`).
 2. Pregunta una por una si quieres instalar las **opcionales** (`extensions-optional.txt`).
 3. Hace un **respaldo** de tu `settings.json` anterior antes de aplicar el nuevo (nunca pierdes tu configuración previa).
+   Si ya es idéntico al de la plantilla, no lo toca ni deja otro respaldo: puedes correrlo las veces que quieras.
+4. Si agregas un `keybindings.json` al repo, lo aplica igual (con respaldo de tus atajos actuales).
 
 > 🛑 Si al ejecutar te dice que no encuentra el comando `code`, abre VS Code, presiona `Ctrl+Shift+P` y ejecuta:
 > **Shell Command: Install 'code' command in PATH**.
@@ -78,6 +82,12 @@ bash reset.sh
 ```
 
 > ⚠️ Esta acción es **irreversible**. El script te pedirá que escribas la palabra `BORRAR` en mayúsculas antes de eliminar nada. Detecta tu sistema operativo y borra las carpetas correctas en Windows, Linux o macOS.
+>
+> Antes de borrar:
+> - exige que **VS Code esté cerrado** (con archivos en uso el borrado queda a medias);
+> - **respalda** lo que no se recupera solo (`settings.json`, `keybindings.json` y `snippets/`) en `~/vscode-reset-backup-<fecha>/`.
+>
+> Si algo no se pudo borrar, te dice qué. Las extensiones y la caché no se respaldan: se reinstalan con `setup.sh`.
 
 Después de resetear, puedes volver a dejar todo listo con `bash setup.sh`.
 
@@ -99,10 +109,13 @@ Después de resetear, puedes volver a dejar todo listo con `bash setup.sh`.
 
 - ⚠️ Lección aprendida: Añadimos la línea siguiente en `settings.json` para evitar errores de montaje en Windows al usar contenedores:
 ```json
-"remote.containers.mountWaylandSocket": false
+"dev.containers.mountWaylandSocket": false
 ```
 
 Esto previene errores silenciosos o advertencias al iniciar entornos `.devcontainer`, especialmente en Windows.
+La extensión Dev Containers renombró sus ajustes de `remote.containers.*` a `dev.containers.*`: la clave vieja
+se ignora sin avisar, así que si copias este ajuste de una guía antigua, revisa el prefijo.
+
 ---
 
 ## 🛠 ¿Qué incluye?

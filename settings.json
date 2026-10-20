@@ -6,5 +6,5 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "workbench.colorTheme": "Default Dark+",
   "jupyter.interactiveWindow.textEditor.executeSelection": true,
-  "remote.containers.mountWaylandSocket": false
+  "dev.containers.mountWaylandSocket": false
 }
